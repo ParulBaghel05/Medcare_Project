@@ -1,0 +1,250 @@
+.main {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.main1 {
+  width: 45%;
+  background-color: #1C4A2A;
+  display: flex;
+  flex-direction: column;
+  padding: 60px 80px;
+  gap: 40px;
+  justify-content: center;
+}
+
+.main2 {
+  width: 55%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("/appointmain.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.fText {
+  color: white;
+  font-size: 3.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.sText {
+  color: white;
+  font-size: 1.25rem;
+  line-height: 1.6;
+}
+
+.cont1 {
+  background-color: white;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  padding: 32px;
+  width: 80%;
+  max-width: 600px;
+  z-index: 1;
+  position: relative;
+  border-radius: 8px;
+}
+
+.schBtn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.schBtn p {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.schBtn button {
+  background-color: #1C4A2A;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  white-space: nowrap;
+}
+
+.schBtn button:hover {
+  background-color: #153d21;
+}
+
+.bookBtn {
+  display: flex;
+  /* gap: 16px; */
+  margin-bottom: 24px;
+}
+
+.bookBtn button {
+  flex: 1;
+  padding: 12px 24px;
+  /* border-radius: 8px; */
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.bookBtn button:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background-color: #1C4A2A;
+  color: white;
+  border: none;
+}
+
+.bookBtn button:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: white;
+  color: #333;
+  border: 1px solid #e0e0e0;
+}
+
+.bookBtn button:first-child:hover {
+  background-color: #153d21;
+}
+
+.bookBtn button:last-child:hover {
+  background-color: #f5f5f5;
+}
+
+.cont1 > p {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cont1 > p::after {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.cont1 > button {
+  background-color: #1C4A2A;
+  color: white;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  margin-top: 24px;
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+.cont1 > button:hover {
+  background-color: #153d21;
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .main1 {
+    padding: 60px 50px;
+  }
+  
+  .fText {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .main {
+    flex-direction: column;
+  }
+  
+  .main1, .main2 {
+    width: 100%;
+  }
+  
+  .main1 {
+    padding: 60px 40px;
+  }
+  
+  .main2 {
+    min-height: 700px;
+  }
+  
+  .cont1 {
+    width: 90%;
+    margin: 40px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .fText {
+    font-size: 2.5rem;
+  }
+  
+  .sText {
+    font-size: 1.125rem;
+  }
+  
+  .bookBtn {
+    flex-direction: column;
+  }
+  
+  .bookBtn button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .main1 {
+    padding: 40px 24px;
+  }
+  
+  .fText {
+    font-size: 2rem;
+  }
+  
+  .cont1 {
+    padding: 24px;
+    width: 92%;
+  }
+  
+  .schBtn {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .schBtn button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .main2 {
+    min-height: 600px;
+  }
+  
+  .fText {
+    font-size: 1.8rem;
+  }
+}

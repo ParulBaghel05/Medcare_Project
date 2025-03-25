@@ -1,0 +1,1 @@
+{"root":["./index.ts","./api/index.ts","./api/v1/index.ts","./api/v1/config/db.ts","./api/v1/controllers/authcontroller.ts","./api/v1/routes/authroutes.ts","./api/v1/services/authservice.ts"],"version":"5.8.2"}
