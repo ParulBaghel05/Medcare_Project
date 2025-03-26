@@ -6,7 +6,11 @@ const dbPool=new Pool({
 })
 
 dbPool.on("connect",()=>{
-    console.log("Connected to PostgreSQL database");
+    console.log("Connected to the database");
+})
+
+dbPool.on("error",()=>{
+    console.log("Error in connecting to the database");
 })
 
 export default dbPool;
