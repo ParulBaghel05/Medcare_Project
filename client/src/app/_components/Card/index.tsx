@@ -1,11 +1,19 @@
+"use client";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
-import styles from "./index.module.css";
 import Link from "next/link";
+import styles from "./index.module.css";
 
 const DoctorCard = ({ doctor }: { doctor: any }) => {
+  const router = useRouter();
+
+  const handleCardClick = () => {
+    router.push(`/appointments/${doctor.id}`);
+  };
+
   return (
     <div className={styles.cardWrapper}>
-      <div className={styles.cardContent}>
+      <div className={styles.cardContent} onClick={handleCardClick} role="button" tabIndex={0}>
         <Image src="/doctor.svg" alt="Doctor Image" width={150} height={150} className={styles.doctorImage} />
         <div className={styles.infoSection}>
           <p className={styles.doctorName}>{doctor.name}</p>
@@ -20,11 +28,11 @@ const DoctorCard = ({ doctor }: { doctor: any }) => {
             </p>
           </div>
         </div>
-            <p className={styles.rating}>
-            {[...Array(5)].map((_, index) => (
-                <span key={index} style={{color: index < doctor.ratings ? 'gold' : '#E0E0E0'}}>★</span>
-            ))}
-            </p>
+        <p className={styles.rating}>
+          {[...Array(5)].map((_, index) => (
+            <span key={index} style={{ color: index < doctor.ratings ? "gold" : "#E0E0E0" }}>★</span>
+          ))}
+        </p>
       </div>
       <Link className={styles.bookButton} href={`/appointments/${doctor.id}/schedule`}>
         Book Appointment

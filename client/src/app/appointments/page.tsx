@@ -1,38 +1,82 @@
 "use client";
-import { useRef, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
-import data from "@/data/data.json";
+import axios from "axios";
 import DoctorCard from "../_components/Card";
 import SideCard from "../_components/SideCard";
 import styles from "./page.module.css";
 
+interface Doctor {
+  id: number;
+  name: string;
+  speciality: string;
+  experience: number;
+  photo_url: string;
+  rating: number;
+  location: string;
+  gender: "Male" | "Female" | "Other";
+}
+
 const AppointmentPage = () => {
-  const [filteredDoctors, setFilteredDoctors] = useState(data);
+  const [doctors, setDoctors] = useState<Doctor[]>([]);
+  const [filteredDoctors, setFilteredDoctors] = useState<Doctor[]>([]);
+  const [loading, setLoading] = useState(true);
+
   const ratingRef = useRef<{ reset: () => void } | null>(null);
   const experienceRef = useRef<{ reset: () => void } | null>(null);
   const genderRef = useRef<{ reset: () => void } | null>(null);
 
+  // Fetch doctors from database
+  useEffect(() => {
+    const fetchDoctors = async () => {
+      try {
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE}/api/v1/doctor/getDoctors`);
+          setDoctors(res.data);
+          setFilteredDoctors(res.data);
+      } catch (error) {
+        console.error("Error fetching doctors:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDoctors();
+  }, []);
+
   const applyFilter = (category: string, value: string) => {
-    let updatedDoctors = data;
+    let updatedDoctors = doctors;
 
     switch (category) {
       case "rating":
-        updatedDoctors = updatedDoctors.filter((doc) => doc.ratings >= Number(value[0]));
+        updatedDoctors = updatedDoctors.filter((doc) => doc.rating >= Number(value[0]));
         break;
       case "experience":
+        updatedDoctors = updatedDoctors.filter((doc) => {
+          const exp = doc.experience;
+          if (value === "15+ years") return exp >= 15;
+          if (value === "10-15 years") return exp >= 10 && exp < 15;
+          if (value === "5-10 years") return exp >= 5 && exp < 10;
+          if (value === "3-5 years") return exp >= 3 && exp < 5;
+          if (value === "1-3 years") return exp >= 1 && exp < 3;
+          return exp < 1;
+        });
+        break;
       case "gender":
+        if (value !== "All") updatedDoctors = updatedDoctors.filter((doc) => doc.gender === value);
         break;
     }
+
     setFilteredDoctors(updatedDoctors);
   };
 
   const resetFilters = () => {
-    ratingRef.current?.reset();6
+    ratingRef.current?.reset();
     experienceRef.current?.reset();
     genderRef.current?.reset();
-    setFilteredDoctors(data);
+    setFilteredDoctors(doctors);
   };
 
+  if (loading) return <p>Loading doctors...</p>;
   return (
     <div className={styles.container}>
       <section className={styles.heroSection}>
@@ -59,9 +103,11 @@ const AppointmentPage = () => {
             <SideCard title="Gender" data={["All", "Male", "Female"]} handleFilter={applyFilter} ref={genderRef} />
           </aside>
           <div className={styles.doctorList}>
-            {filteredDoctors.map((doctor) => (
+            {filteredDoctors.length === 0 ?(doctors.map((doctor) => (
               <DoctorCard key={doctor.id} doctor={doctor} />
-            ))}
+            ))):(filteredDoctors.map((doctor) => (
+              <DoctorCard key={doctor.id} doctor={doctor} />
+            )))}
           </div>
         </div>
       </section>
