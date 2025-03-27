@@ -19,8 +19,8 @@ const Header = () => {
         </nav>
       </div>
       <div className={styles["nav-2"]}>
-        <button className={styles["login-btn"]}>Login</button>
-        <button className={styles["reg-btn"]}>Register</button>
+        <Link href="/login" className={styles["login-btn"]}>Login</Link>
+        <Link href="/signup" className={styles["reg-btn"]}>Register</Link>
       </div>
     </header>
   );

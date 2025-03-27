@@ -1,129 +1,134 @@
-.main {
-    display: flex;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+
+.heroSection {
+  text-align: center;
+  margin-bottom: 60px;
+  /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); */
+}
+
+.title {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.searchWrapper {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.searchInput {
+  flex-grow: 1;
+  padding: 15px 15px 15px 45px;
+  border: 2px solid #374957;
+  border-radius: 10px 0 0 10px;
+  font-size: 16px;
+}
+
+.searchButton {
+  padding: 15px 24px;
+  background-color: #1C4A2A;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 0 10px 10px 0;
+  cursor: pointer;
+}
+
+.resultsSection {
+  margin-top: 40px;
+}
+
+.resultsTitle {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.resultsSubtitle {
+  margin-bottom: 20px;
+}
+
+.contentWrapper {
+  display: flex;
+  gap: 30px;
+}
+
+.sidebar {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.filterHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.resetButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.doctorList {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 1024px) {
+  .contentWrapper {
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 85vh;
-    padding: 0 20px;
-    text-align: center;
   }
-  
-  .main h2 {
-    font-size: 2.5rem;
-    color: #1C4A2A;
-    margin-bottom: 2rem;
-    line-height: 1.2;
-  }
-  
-  .searchContainer {
-    display: flex;
-    align-items: center;
+
+  .sidebar {
     width: 100%;
-    max-width: 800px;
-    position: relative;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
-  
+
+  .doctorList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .searchWrapper {
+    flex-direction: column;
+  }
+
   .searchInput {
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+
+  .searchButton {
     width: 100%;
-    padding: 15px 10px 15px 45px;
-    border: 1px solid #1C4A2A;
-    border-right: none;
-    border-top-left-radius: 6px;
-    border-bottom-left-radius: 6px;
-    font-size: 1rem;
-    background: url('/searchicon.svg') no-repeat 15px center;
-    background-size: 18px;
-    outline: none;
+    border-radius: 10px;
   }
-  
-  .searchInput:focus {
-    border-color: #153d21;
-    box-shadow: 0 0 0 2px rgba(28, 74, 42, 0.1);
+
+  .sidebar {
+    flex-direction: column;
   }
-  
-  .searchBtn {
-    padding: 16px 25px;
-    color: white;
-    border: none;
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
-    background-color: #1C4A2A;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    white-space: nowrap;
+
+  .doctorList {
+    grid-template-columns: 1fr;
   }
-  
-  .searchBtn:hover {
-    background-color: #153d21;
-  }
-  
-  /* Responsiveness */
-  @media (max-width: 992px) {
-    .main h2 {
-      font-size: 2.2rem;
-    }
-    
-    .searchContainer {
-      max-width: 700px;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .main h2 {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-    }
-    
-    .searchContainer {
-      max-width: 550px;
-    }
-    
-    .searchInput {
-      padding: 12px 10px 12px 40px;
-    }
-    
-    .searchBtn {
-      padding: 12px 20px;
-    }
-  }
-  
-  @media (max-width: 576px) {
-    .main h2 {
-      font-size: 1.75rem;
-      margin-bottom: 1.25rem;
-    }
-    
-    .searchContainer {
-      flex-direction: column;
-      max-width: 100%;
-    }
-    
-    .searchInput {
-      width: 100%;
-      border-right: 1px solid #1C4A2A;
-      border-radius: 6px;
-      margin-bottom: 10px;
-    }
-    
-    .searchBtn {
-      width: 100%;
-      border-radius: 6px;
-    }
-  }
-  
-  @media (max-width: 400px) {
-    .main h2 {
-      font-size: 1.5rem;
-    }
-    
-    .searchInput {
-      padding: 10px 10px 10px 35px;
-      background-position: 10px center;
-    }
-    
-    .searchBtn {
-      padding: 10px 15px;
-    }
-  }
+}

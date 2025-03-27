@@ -79,7 +79,7 @@
   }
   
   .password-input input {
-    background-image: url('/frame1.svg'), url('/eye.svg'); 
+    background-image: url('/lockicon.svg'), url('/eye.svg'); 
   }
   
   .login-btns {

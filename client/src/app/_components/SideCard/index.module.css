@@ -1,0 +1,76 @@
+.card {
+  width: 100%;
+  background-color: white;
+  border: 1px solid #E0E0E0;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.cardTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+.optionItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.optionItem input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #3498db;
+  border-radius: 50%;
+  outline: none;
+  margin-right: 10px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.optionItem input[type="radio"]:hover {
+  border-color: #2980b9;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+.optionItem input[type="radio"]:checked {
+  border-color: #3498db;
+}
+
+.optionItem input[type="radio"]:checked::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background-color: #3498db;
+  border-radius: 50%;
+}
+
+.optionItem label {
+  font-size: 14px;
+  color: #7f8c8d;
+  cursor: pointer;
+  user-select: none;
+  flex-grow: 1;
+  transition: color 0.3s ease;
+}
+
+.optionItem input[type="radio"]:checked + label {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.optionItem:hover label {
+  color: #2c3e50;
+}
