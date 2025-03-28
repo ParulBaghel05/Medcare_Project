@@ -29,8 +29,11 @@ const DoctorCard = ({ doctor }: { doctor: any }) => {
           </div>
         </div>
         <p className={styles.rating}>
+          Ratings:{" "}
           {[...Array(5)].map((_, index) => (
-            <span key={index} style={{ color: index < doctor.ratings ? "gold" : "#E0E0E0" }}>★</span>
+            <span key={index} style={{ color: index < Math.round(doctor.rating) ? "gold" : "#E0E0E0" }}>
+              ★
+            </span>
           ))}
         </p>
       </div>

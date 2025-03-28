@@ -53,28 +53,63 @@ const DoctorProfile = () => {
   return (
     <div className={styles.container}>
       <div className={styles.profileCard}>
-        <Image
-          src={doctor.photo_url}
-          alt={doctor.name}
-          width={150}
-          height={150}
-          className={styles.profileImage}
-        />
-        <h2>{doctor.name}</h2>
-        <p><strong>Speciality:</strong> {doctor.speciality}</p>
-        <p><strong>Experience:</strong> {doctor.experience} years</p>
-        <p><strong>Rating:</strong> {doctor.rating} ⭐</p>
-        <p><strong>Location:</strong> {doctor.location}</p>
-        <p><strong>Gender:</strong> {doctor.gender}</p>
-        <p>
-        <strong>Treated Diseases:</strong> {Object.entries(doctor.disease)
-          .map(([disease, treatment]) => `${disease} (${treatment})`)
-          .join(", ")}
-        </p>
-
-        <Link className={styles.bookButton} href={`/appointments/${doctor.id}/schedule`}>
-        Book Appointment
-      </Link>
+        <div className={styles.profileLeftSection}>
+          <Image
+            src="/doctor.svg"
+            alt={doctor.name}
+            width={250}
+            height={250}
+            className={styles.profileImage}
+          />
+          <div className={styles.profileName}>{doctor.name}</div>
+        </div>
+        <div className={styles.profileRightSection}>
+          <div className={styles.profileDetails}>
+            <div className={styles.detailSection}>
+              <h3>Speciality</h3>
+              <div className={styles.speciality}>
+                {doctor.speciality.split(',').map((spec, index) => (
+                  <span key={index} className={styles.specialityPill}>{spec.trim()}</span>
+                ))}
+              </div>
+            </div>
+            
+            <div className={styles.detailSection}>
+              <h3>Experience</h3>
+              <p>{doctor.experience} Years</p>
+            </div>
+            
+            <div className={styles.detailSection}>
+              <h3>Location</h3>
+              <p>{doctor.location}</p>
+            </div>
+            
+            <div className={styles.detailSection}>
+              <h3>Gender</h3>
+              <p>{doctor.gender}</p>
+            </div>
+            
+            <div className={styles.detailSection}>
+              <h3>Treated Diseases</h3>
+              <p>
+                <strong>Treated Diseases:</strong> {Object.entries(doctor.disease)
+                  .map(([disease, treatment]) => `${disease} (${treatment})`)
+                  .join(", ")}
+              </p>
+            </div>
+            
+            <div className={styles.detailSection}>
+              <h3>Rating</h3>
+              <p>{doctor.rating} ⭐</p>
+            </div>
+          </div>
+          
+          <div className={styles.bookSection}>
+            <Link className={styles.bookButton} href={`/appointments/${doctor.id}/schedule`}>
+              Book Appointment
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );

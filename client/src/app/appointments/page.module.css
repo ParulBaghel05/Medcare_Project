@@ -34,7 +34,7 @@
 .searchInput {
   flex-grow: 1;
   padding: 15px 15px 15px 45px;
-  border: 2px solid #374957;
+  border: 2px solid #1C4A2A;
   border-radius: 10px 0 0 10px;
   font-size: 16px;
 }
@@ -80,9 +80,12 @@
   margin-bottom: 10px;
 }
 
-.resetButton {
-  background: none;
+.applyButton {
+  color: white;
+  background: #1C4A2A;
   border: none;
+  border-radius: 2px;
+  padding: 5px;
   cursor: pointer;
 }
 
@@ -92,6 +95,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
+
 
 @media (max-width: 1024px) {
   .contentWrapper {
