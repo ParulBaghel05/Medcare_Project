@@ -103,7 +103,6 @@ export default function Schedule() {
     setLoading(true);
     setError(null);
 
-    // Prepare appointment data
     const appointmentData = {
       patient_id:1,
       doctor_id: doctorId,
@@ -114,11 +113,9 @@ export default function Schedule() {
 
 
 
-    // Send booking request to API
     axios
       .post(`${process.env.NEXT_PUBLIC_API_BASE}/api/v1/appointment/book`, appointmentData)
       .then((res) => {
-        // Redirect to confirmation page or show success message
         toast.success("Appointment booked");
       })
       .catch((error) => {

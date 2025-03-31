@@ -24,6 +24,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+
 }
 
 .fText {
@@ -48,6 +49,9 @@
   z-index: 1;
   position: relative;
   border-radius: 8px;
+  height: 700px;  
+  overflow: scroll;
+  scrollbar-width: none;
 }
 
 .schBtn {
