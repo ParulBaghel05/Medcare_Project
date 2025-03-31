@@ -1,0 +1,128 @@
+.appointmentsContainer {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height:550px;
+    overflow: scroll;
+  }
+  
+  .pageTitle {
+    color: #2a6b35;
+    margin-bottom: 1.5rem;
+    font-size: 1.75rem;
+    font-weight: 600;
+    border-bottom: 2px solid #2a6b35;
+    padding-bottom: 0.5rem;
+  }
+  
+  .appointmentTable {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 0.5rem;
+  }
+  
+  .tableHeader {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1.5fr;
+    background-color: #f4f4f4;
+    padding: 0.75rem;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .tableRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1.5fr;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  .tableRow > div {
+    display: flex;
+    align-items: center;
+  }
+  
+  .status-pending {
+    color: #ff9800;
+    font-weight: 500;
+  }
+  
+  .status-approved {
+    color: #4caf50;
+    font-weight: 500;
+  }
+  
+  .status-declined {
+    color: #f44336;
+    font-weight: 500;
+  }
+  
+  .actionButtons {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .approveButton,
+  .declineButton {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .approveButton {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .approveButton:hover {
+    background-color: #45a049;
+  }
+  
+  .declineButton {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .declineButton:hover {
+    background-color: #d32f2f;
+  }
+  
+  @media (max-width: 768px) {
+    .tableHeader,
+    .tableRow {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: auto;
+      gap: 0.5rem;
+    }
+  
+    .tableHeader > div,
+    .tableRow > div {
+      padding: 0.5rem;
+    }
+  
+    .actionButtons {
+      grid-column: 1 / -1;
+      justify-content: space-between;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .tableHeader,
+    .tableRow {
+      grid-template-columns: 1fr;
+    }
+  
+    .actionButtons {
+      flex-direction: column;
+    }
+  }

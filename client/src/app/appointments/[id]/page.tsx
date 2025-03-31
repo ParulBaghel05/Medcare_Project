@@ -31,7 +31,7 @@ const DoctorProfile = () => {
       try {
         const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE}/api/v1/doctor/${id}`);
         if (res.data) {
-          setDoctor(res.data);
+          setDoctor(res.data.doctor);
         } 
         else {
           setError(true);
@@ -68,9 +68,7 @@ const DoctorProfile = () => {
             <div className={styles.detailSection}>
               <h3>Speciality</h3>
               <div className={styles.speciality}>
-                {doctor.speciality.split(',').map((spec, index) => (
-                  <span key={index} className={styles.specialityPill}>{spec.trim()}</span>
-                ))}
+                {doctor.speciality}
               </div>
             </div>
             

@@ -1,29 +1,14 @@
-// import Image from "next/image";
-// import styles from "./page.module.css";
-// import Header from "./_components/Header";
-// import Footer from "./_components/Footer";
-// import Landing from "./landing/page";
-// import Login from "./login/page";
-// import Signup from "./signup/page";
-// import Schedule from "./appointments/[id]/schedule/page";
-
-// export default function Home() {
-//   return (
-//     <>
-//       {/* <Header/> */}
-//       {/* <Landing/> */}
-//       {/* <Login/> */}
-//       {/* <Signup/> */}
-//       {/* <Footer/> */}
-//       {/* <Schedule/> */}
-//     </>  
-//     );
-// }
-
+"use client"
 import Image from "next/image";
-import styles from "./page.module.css";    
+import styles from "./page.module.css";   
+import { useRouter } from "next/navigation"; 
 
 const Landing = () => {
+  const router = useRouter();
+
+  const handleGetStarted = () => {
+    router.push("/appointments");
+  };
   return (
     <>
       <main className={styles.main}>
@@ -34,7 +19,7 @@ const Landing = () => {
             explore health blogs, and stay on top of your well-being, all in one place.
           </p>
           <div className={styles["get-btn"]}>
-            <button className={styles["st-btn"]}>Get Started</button>
+            <button className={styles["st-btn"]} onClick={handleGetStarted}>Get Started</button>
           </div>
         </section>
 

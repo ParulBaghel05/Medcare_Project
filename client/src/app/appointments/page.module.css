@@ -2,25 +2,29 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 24px 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .heroSection {
   text-align: center;
-  margin-bottom: 60px;
-  /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); */
+  margin-bottom: 20px;
+  padding: 20px 0;
 }
 
 .title {
-  font-size: 32px;
+  font-size: clamp(24px, 5vw, 32px);
   margin-bottom: 20px;
+  color: #1C4A2A;
 }
 
 .searchWrapper {
   display: flex;
   justify-content: center;
   position: relative;
-  max-width: 1200px;
+  max-width: 800px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .searchIcon {
@@ -37,6 +41,8 @@
   border: 2px solid #1C4A2A;
   border-radius: 10px 0 0 10px;
   font-size: 16px;
+  width: calc(100% - 120px);
+  outline: none;
 }
 
 .searchButton {
@@ -46,19 +52,32 @@
   border: none;
   border-radius: 0 10px 10px 0;
   cursor: pointer;
+  width: 120px;
+  transition: background-color 0.3s;
 }
 
-.resultsSection {
-  margin-top: 40px;
+.searchButton:hover {
+  background-color: #153d21;
 }
 
+/* Moved this section to be part of the heroSection */
 .resultsTitle {
-  font-size: 24px;
+  font-size: clamp(20px, 4vw, 24px);
+  margin-top: 20px;
   margin-bottom: 10px;
+  color: #1C4A2A;
+  text-align: center;
 }
 
 .resultsSubtitle {
-  margin-bottom: 20px;
+  margin-bottom: 0;
+  color: #555;
+  text-align: center;
+}
+/* End of moved section */
+
+.resultsSection {
+  margin-top: 40px;
 }
 
 .contentWrapper {
@@ -68,6 +87,7 @@
 
 .sidebar {
   width: 250px;
+  min-width: 250px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -78,25 +98,71 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+  font-weight: bold;
 }
 
 .applyButton {
   color: white;
   background: #1C4A2A;
   border: none;
-  border-radius: 2px;
-  padding: 5px;
+  border-radius: 4px;
+  padding: 8px 12px;
   cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.applyButton:hover {
+  background-color: #153d21;
+}
+
+.doctorListContainer {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .doctorList {
-  flex-grow: 1;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  column-gap: 30px;
+  row-gap: 30px;
+  width: 100%;
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
 
+.paginationButton {
+  padding: 8px 15px;
+  background-color: #1C4A2A;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.paginationButton:hover:not(:disabled) {
+  background-color: #153d21;
+}
+
+.paginationButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.activePage {
+  background-color: #0d2818;
+  font-weight: bold;
+}
+
+/* Tablet Breakpoint */
 @media (max-width: 1024px) {
   .contentWrapper {
     flex-direction: column;
@@ -104,35 +170,100 @@
 
   .sidebar {
     width: 100%;
+    min-width: auto;
     flex-direction: row;
     flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 25px;
   }
-
+  
+  .sidebar > div {
+    flex: 1 1 calc(33.333% - 15px);
+    min-width: 200px;
+  }
+  
   .doctorList {
     grid-template-columns: repeat(2, 1fr);
+    column-gap: 25px;
+    row-gap: 25px;
   }
 }
 
+/* Mobile Landscape Breakpoint */
 @media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+  
+  .heroSection {
+    margin-bottom: 30px;
+  }
+  
   .searchWrapper {
     flex-direction: column;
+    gap: 10px;
   }
 
   .searchInput {
     border-radius: 10px;
-    margin-bottom: 10px;
+    width: 100%;
+    padding: 12px 12px 12px 40px;
   }
 
   .searchButton {
     width: 100%;
     border-radius: 10px;
   }
-
+  
+  .resultsTitle {
+    margin-top: 25px;
+  }
+  
   .sidebar {
     flex-direction: column;
   }
-
+  
+  .sidebar > div {
+    flex: 1 1 100%;
+  }
+  
   .doctorList {
     grid-template-columns: 1fr;
+    row-gap: 30px;
+  }
+  
+  .pagination {
+    gap: 5px;
+  }
+  
+  .paginationButton {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+}
+
+/* Small Mobile Breakpoint */
+@media (max-width: 480px) {
+  .title {
+    font-size: 22px;
+  }
+  
+  .searchInput {
+    padding: 10px 10px 10px 35px;
+  }
+  
+  .searchIcon {
+    width: 15px;
+    height: 15px;
+    left: 10px;
+  }
+  
+  .pagination {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .doctorList {
+    row-gap: 25px;
   }
 }

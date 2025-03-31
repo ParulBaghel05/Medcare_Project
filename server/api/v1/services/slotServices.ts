@@ -8,12 +8,12 @@ interface Slot {
   is_available: boolean;
 }
 
-const getSlotsByDoctor = async (doctor_id: number) => {
+const getSlotsByDoctor = async (doctor_id: number,date:string) => {
   const result = await dbPool.query(
-    "SELECT * FROM time_slots WHERE doctor_id = $1 ORDER BY date, start_time",
-    [doctor_id]
+    "SELECT ts.id as time_slot_id,doc.id as doc_id ,ts.*,doc.* FROM time_slots as ts JOIN doctors as doc on ts.doctor_id=doc.id  WHERE doctor_id = $1 and date=$2 ORDER BY date, start_time ",
+    [doctor_id,date]
   );
-  return result.rows[0];
+  return result.rows;
 };
 
 const createSlot = async (slotData: Slot) => {

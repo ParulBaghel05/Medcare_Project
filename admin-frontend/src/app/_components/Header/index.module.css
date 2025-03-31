@@ -1,0 +1,39 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:36px 60px;
+    box-shadow: 0px 3px 15px 0px #0000001A;
+}
+.subcontainer{
+    display: flex;
+    align-items: center;
+    gap:48px
+}
+.titleContainer{
+    display: flex;
+    align-items: center;
+    gap:10px;
+    cursor:pointer;
+}
+
+
+.title{
+   font-size: 28px;
+   color: var(--primary-fontcolor)
+}
+
+.buttonContainer{
+    display: flex;
+    gap:10px;
+}
+.buttons{
+    display: flex;
+    align-items: center;
+    gap:10px;
+    padding: 12px 32px;
+    border-radius: 8px;
+    border:1px solid #E0E8E0;
+    background-color: var(--primary-fontcolor);
+    color: black;   
+}

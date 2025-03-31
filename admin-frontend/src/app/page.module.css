@@ -1,0 +1,177 @@
+.dashboardGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  height: 100vh;
+  padding: 4rem;
+}
+
+.statsContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.statCard {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  height: 10rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.statIconWrapper {
+  padding: 1rem;
+  border-radius: 50%;
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.statIconWrapper-doctors {
+  composes: statIconWrapper;
+  background-color: #e6f3e6;
+}
+
+.statIconWrapper-appointments {
+  composes: statIconWrapper;
+  background-color: #e6f0f7;
+}
+
+.statIconWrapper-pending {
+  composes: statIconWrapper;
+  background-color: #fff7e6;
+}
+
+.statContent {
+  flex-grow: 1;
+}
+
+.statLabel {
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.statValue {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.statValue-doctors {
+  composes: statValue;
+  color: #2a6b35;
+}
+
+.statValue-appointments {
+  composes: statValue;
+  color: #2563eb;
+}
+
+.statValue-pending {
+  composes: statValue;
+  color: #d97706;
+}
+
+.secondaryGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.cardSection {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+}
+
+.cardTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #2a6b35;
+  border-bottom: 2px solid #2a6b35;
+  padding-bottom: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.appointmentList {
+  display: flex;
+  flex-direction: column;
+}
+
+.appointmentItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.appointmentItem:last-child {
+  border-bottom: none;
+}
+
+.appointmentDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.appointmentName {
+  font-weight: 500;
+  color: #111827;
+}
+
+.appointmentDoctor {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.quickActionsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.quickActionButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.quickActionButton-doctors {
+  composes: quickActionButton;
+  background-color: #e6f3e6;
+  color: #2a6b35;
+}
+
+.quickActionButton-appointments {
+  composes: quickActionButton;
+  background-color: #e6f0f7;
+  color: #2563eb;
+}
+
+.quickActionIcon {
+  margin-bottom: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .statsContainer,
+  .secondaryGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .quickActionsGrid {
+    grid-template-columns: 1fr;
+  }
+}

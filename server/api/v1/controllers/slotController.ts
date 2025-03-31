@@ -1,11 +1,15 @@
 import { Request, Response } from "express";
 import SlotService from "../services/slotServices";
 
-export const getSlotsByDoctor = async (req: Request, res: Response) => {
+export const getSlotsByDoctor = async (req: Request, res: Response):Promise<any> => {
   try {
     const { doctor_id } = req.params;
+    const {date}=req.query;
+    if(!date){
+      return res.status(404).json({success:false,message:"No date found for appointment"})
+    }
     console.log(doctor_id);
-    const slots = await SlotService.getSlotsByDoctor(parseInt(doctor_id));
+    const slots = await SlotService.getSlotsByDoctor(parseInt(doctor_id),date as string);
     res.status(200).json({success: true, message: "Slots fetched successfully",slots: slots});
   } catch (err) {
     res.status(500).json({ error: (err as Error).message });

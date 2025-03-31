@@ -2,7 +2,8 @@ import { Pool } from "pg";
 import dotenv from "dotenv";
 dotenv.config();
 const dbPool=new Pool({
-    connectionString:process.env.DATABASE_URL
+    connectionString:process.env.DATABASE_URL,
+    connectionTimeoutMillis: 1000000000,
 })
 
 dbPool.on("connect",()=>{

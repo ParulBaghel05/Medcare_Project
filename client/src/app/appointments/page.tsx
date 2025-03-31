@@ -26,7 +26,6 @@ const AppointmentPage = () => {
   const [filtersApplied, setFiltersApplied] = useState(false);
   const [filters, setFilters] = useState({ rating: "", experience: "", gender: "All" });
 
-  // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
   const [doctorsPerPage] = useState(6);
 
@@ -38,7 +37,7 @@ const AppointmentPage = () => {
     const fetchDoctors = async () => {
       try {
         const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE}/api/v1/doctor/getDoctors`);
-        const sortedDoctors = res.data.sort((a: Doctor, b: Doctor) => b.rating - a.rating);
+        const sortedDoctors = res.data.doctors.sort((a: Doctor, b: Doctor) => b.rating - a.rating);
         setDoctors(sortedDoctors);
         setFilteredDoctors(sortedDoctors);
       } catch (error) {
@@ -104,15 +103,11 @@ const AppointmentPage = () => {
     }
   };
 
-  // Pagination logic
   const indexOfLastDoctor = currentPage * doctorsPerPage;
   const indexOfFirstDoctor = indexOfLastDoctor - doctorsPerPage;
   const currentDoctors = filteredDoctors.slice(indexOfFirstDoctor, indexOfLastDoctor);
 
-  // Change page
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
-
-  // Calculate total pages
   const totalPages = Math.ceil(filteredDoctors.length / doctorsPerPage);
 
   if (loading) return <p>Loading doctors...</p>;
@@ -138,11 +133,11 @@ const AppointmentPage = () => {
           />
           <button className={styles.searchButton} onClick={handleSearch}>Search</button>
         </div>
+        <h3 className={styles.resultsTitle}>{filteredDoctors.length} doctors available</h3>
+        <p className={styles.resultsSubtitle}>Book appointments with minimal wait time and verified doctor details</p>
       </section>
 
       <section className={styles.resultsSection}>
-        <h3 className={styles.resultsTitle}>{filteredDoctors.length} doctors available</h3>
-        <p className={styles.resultsSubtitle}>Book appointments with minimal wait time and verified doctor details</p>
 
         <div className={styles.contentWrapper}>
           <aside className={styles.sidebar}>
@@ -175,7 +170,6 @@ const AppointmentPage = () => {
               >
                 Previous
               </button>
-              
               {[...Array(totalPages)].map((_, index) => (
                 <button
                   key={index}
@@ -185,7 +179,6 @@ const AppointmentPage = () => {
                   {index + 1}
                 </button>
               ))}
-              
               <button 
                 onClick={() => paginate(currentPage + 1)} 
                 disabled={currentPage === totalPages}
