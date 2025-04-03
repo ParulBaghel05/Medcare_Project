@@ -4,11 +4,30 @@ import Link from "next/link";
 import styles from "./index.module.css";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
+
+
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const pathname = usePathname();
+
+  const navLinks = [
+    { path: "/", name: "Home" },
+    { path: "/appointments", name: "Appointments" },
+    { path: "/blog", name: "Health Blog" },
+    { path: "/reviews", name: "Reviews" },
+  ];
+   const router=useRouter();
+   const userData=Cookies.get("user");
+   let finalUser=null;
+   if(userData){
+        const parsedData=encodeURI(userData);
+        finalUser=JSON.stringify(parsedData);
+   }
 
   useEffect(() => {
     setIsMounted(true);
@@ -20,11 +39,18 @@ const Header = () => {
 
   const handleLogout = () => {
     Cookies.remove("user");
+    Cookies.remove("token");
+    router.push("/login")
     setIsLoggedIn(false);
   };
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
+  };
+
+  //@ts-ignore
+  const isActive = (path) => {
+    return pathname === path;
   };
 
   return (
@@ -43,29 +69,26 @@ const Header = () => {
       </div>
       
       <div className={`${styles.anchors} ${menuOpen ? styles.active : ""}`}>
-        <Link href="/" className={styles["nav-link"]}>
-          Home
-        </Link>
-        <Link href="/appointments" className={styles["nav-link"]}>
-          Appointments
-        </Link>
-        <Link href="/blog" className={styles["nav-link"]}>
-          Health Blog
-        </Link>
-        <Link href="/reviews" className={styles["nav-link"]}>
-          Reviews
-        </Link>
+        {navLinks.map((link) => (
+          <Link 
+            key={link.path} 
+            href={link.path} 
+            className={`${styles["nav-link"]} ${isActive(link.path) ? styles["active-link"] : ""}`}
+          >
+            {link.name}
+          </Link>
+        ))}
       </div>
       
       <div className={`${styles["nav-2"]} ${menuOpen ? styles.active : ""}`}>
         {isMounted && (
           <>
-            {!isLoggedIn ? (
+            {!finalUser ? (
               <>
                 <Link href="/login">
                   <button className={styles["login-btn"]}>Login</button>
                 </Link>
-                <Link href="/register">
+                <Link href="/signup">
                   <button className={styles["reg-btn"]}>Register</button>
                 </Link>
               </>

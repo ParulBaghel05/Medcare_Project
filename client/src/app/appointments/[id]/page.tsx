@@ -5,6 +5,7 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
+import Loader from "@/app/_components/Loader";
 
 interface Doctor {
   id: number;
@@ -32,8 +33,7 @@ const DoctorProfile = () => {
         const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE}/api/v1/doctor/${id}`);
         if (res.data) {
           setDoctor(res.data.doctor);
-        } 
-        else {
+        } else {
           setError(true);
         }
       } catch (error) {
@@ -47,7 +47,18 @@ const DoctorProfile = () => {
     fetchDoctor();
   }, [id]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) {
+    return (
+      <div style={{
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+      }}>
+        <Loader />
+      </div>
+    );
+  }
   if (error || !doctor) return <p>Doctor not found</p>;
 
   return (
@@ -55,7 +66,7 @@ const DoctorProfile = () => {
       <div className={styles.profileCard}>
         <div className={styles.profileLeftSection}>
           <Image
-            src="/doctor.svg"
+            src={"/doctor.svg"} 
             alt={doctor.name}
             width={250}
             height={250}

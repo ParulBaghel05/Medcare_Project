@@ -7,6 +7,7 @@ import DateSelector from "@/app/_components/DateSelector";
 import { useParams, useRouter } from "next/navigation";
 import { SlotData } from "@/types/type";
 import { toast } from "react-toastify";
+import Loader from "@/app/_components/Loader";
 
 interface SlotsState {
   morning: SlotData[];
@@ -89,7 +90,6 @@ export default function Schedule() {
   };
 
   const handleBookAppointment = (): void => {
-    // Validate all required selections are made
     if (!appointmentType) {
       setError("Please select appointment type (Video Consult or Hospital Visit)");
       return;
@@ -110,8 +110,6 @@ export default function Schedule() {
       appointment_date: selectedDate.toISOString().split('T')[0],
       type: appointmentType,
     };
-
-
 
     axios
       .post(`${process.env.NEXT_PUBLIC_API_BASE}/api/v1/appointment/book`, appointmentData)
@@ -144,11 +142,7 @@ export default function Schedule() {
             <p>Schedule Appointment</p>
             <button>Book Appointment</button>
           </div>
-          
-          {/* Date Selector */}
-          <DateSelector onDateSelect={handleDateSelect} />
-          
-          {/* Appointment Type Selector */}
+
           <div className={styles.bookBtn}>
             <button 
               onClick={() => handleAppointmentTypeSelect("virtual")}
@@ -163,17 +157,16 @@ export default function Schedule() {
               Book Hospital Visit
             </button>
           </div>
-          
-          {/* Location */}
+
           <p>{location}</p>
-          
-          {/* Loading State */}
-          {loading && <p className={styles.loadingText}>Loading available slots...</p>}
-          
-          {/* Error Message */}
+
+          <DateSelector onDateSelect={handleDateSelect} />
+
+          {loading && <Loader />}
+          {/* {loading && <p className={styles.loadingText}>Loading available slots...</p>} */}
+
           {error && <p className={styles.errorText}>{error}</p>}
-          
-          {/* Slots */}
+
           <Slots 
             isMorning={true} 
             data={slots.morning} 
@@ -187,7 +180,6 @@ export default function Schedule() {
             selectedSlotId={selectedSlot?.id}
           />
           
-          {/* Next Button */}
           <button 
             className={`${styles.nextBtn} ${(!appointmentType || !selectedSlot) ? styles.disabledBtn : ""}`}
             onClick={handleBookAppointment}

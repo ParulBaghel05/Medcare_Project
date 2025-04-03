@@ -36,7 +36,6 @@ export default function AppointmentsPage() {
 
       //@ts-ignore
       if (response.data.success) {
-        // Update the local state to reflect the status change
         //@ts-ignore
         setAppointments((prevAppointments) =>
           prevAppointments.map((appointment) =>

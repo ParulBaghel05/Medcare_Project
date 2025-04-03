@@ -21,6 +21,7 @@
     "@ljharb/tsconfig": "^0.3.2",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
+    "@types/passport-google-oauth20": "^2.0.16",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",

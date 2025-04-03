@@ -60,7 +60,6 @@
   background-color: #153d21;
 }
 
-/* Moved this section to be part of the heroSection */
 .resultsTitle {
   font-size: clamp(20px, 4vw, 24px);
   margin-top: 20px;
@@ -74,7 +73,6 @@
   color: #555;
   text-align: center;
 }
-/* End of moved section */
 
 .resultsSection {
   margin-top: 40px;
@@ -157,12 +155,16 @@
   cursor: not-allowed;
 }
 
+.ellipsis {
+  padding: 0 8px;
+  display: inline-block;
+}
+
 .activePage {
   background-color: #0d2818;
   font-weight: bold;
 }
 
-/* Tablet Breakpoint */
 @media (max-width: 1024px) {
   .contentWrapper {
     flex-direction: column;
@@ -189,7 +191,6 @@
   }
 }
 
-/* Mobile Landscape Breakpoint */
 @media (max-width: 768px) {
   .container {
     padding: 15px;
@@ -242,7 +243,6 @@
   }
 }
 
-/* Small Mobile Breakpoint */
 @media (max-width: 480px) {
   .title {
     font-size: 22px;

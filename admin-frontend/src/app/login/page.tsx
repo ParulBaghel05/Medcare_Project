@@ -32,8 +32,12 @@ export default function AdminLogin() {
         throw new Error(res.data.message || "Login failed");
       }
 
-      Cookies.set("user", res.data.token, { secure: true, sameSite: "strict" });
+      //@ts-ignore
+      Cookies.set("token", res.data.token.token, { secure: true, sameSite: "strict" });
+      //@ts-ignore
+      Cookies.set("username", res.data.token.user.name, { secure: true, sameSite: "strict" });
       toast.success("Welcome Back");
+      console.log("login data is " , res.data)
       router.push("/");
 
     } catch (error: any) {

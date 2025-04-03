@@ -66,6 +66,46 @@ const DoctorsPage = () => {
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
   const totalPages = Math.ceil(filteredDoctors.length / doctorsPerPage);
 
+  const generatePaginationNumbers = () => {
+    const pageNumbers = [];
+    const maxPageNumbersToShow = 3; 
+    
+    if (totalPages <= maxPageNumbersToShow + 2) {
+    
+      for (let i = 1; i <= totalPages; i++) {
+        pageNumbers.push(i);
+      }
+    } else {
+      pageNumbers.push(1);
+      
+      if (currentPage <= maxPageNumbersToShow) {
+        
+        for (let i = 2; i <= maxPageNumbersToShow + 1; i++) {
+          pageNumbers.push(i);
+        }
+        pageNumbers.push('ellipsis');
+        pageNumbers.push(totalPages);
+      } else if (currentPage > totalPages - maxPageNumbersToShow) {
+       
+        pageNumbers.push('ellipsis');
+        for (let i = totalPages - maxPageNumbersToShow; i < totalPages; i++) {
+          pageNumbers.push(i);
+        }
+        pageNumbers.push(totalPages);
+      } else {
+        
+        pageNumbers.push('ellipsis');
+        for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+          pageNumbers.push(i);
+        }
+        pageNumbers.push('ellipsis');
+        pageNumbers.push(totalPages);
+      }
+    }
+    
+    return pageNumbers;
+  };
+
   if (loading) return <p>Loading doctors...</p>;
 
   return (
@@ -102,31 +142,42 @@ const DoctorsPage = () => {
                 currentDoctors.map((doctor) => <DoctorCard key={doctor.id} doctor={doctor} />)
               )}
             </div>
-            <div className={styles.pagination}>
-              <button 
-                onClick={() => paginate(currentPage - 1)} 
-                disabled={currentPage === 1}
-                className={styles.paginationButton}
-              >
-                Previous
-              </button>
-              {[...Array(totalPages)].map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => paginate(index + 1)}
-                  className={`${styles.paginationButton} ${currentPage === index + 1 ? styles.activePage : ''}`}
+            {totalPages > 1 && (
+              <div className={styles.pagination}>
+                <button 
+                  onClick={() => paginate(currentPage - 1)} 
+                  disabled={currentPage === 1}
+                  className={styles.paginationButton}
+                  aria-label="Previous page"
                 >
-                  {index + 1}
+                  Previous
                 </button>
-              ))}
-              <button 
-                onClick={() => paginate(currentPage + 1)} 
-                disabled={currentPage === totalPages}
-                className={styles.paginationButton}
-              >
-                Next
-              </button>
-            </div>
+                
+                {generatePaginationNumbers().map((pageNumber, index) => 
+                  pageNumber === 'ellipsis' ? (
+                    <span key={`ellipsis-${index}`} className={styles.paginationEllipsis}>...</span>
+                  ) : (
+                    <button
+                      key={`page-${pageNumber}`}
+                      onClick={() => paginate(pageNumber as number)}
+                      className={`${styles.paginationButton} ${currentPage === pageNumber ? styles.activePage : ''}`}
+                      aria-current={currentPage === pageNumber ? 'page' : undefined}
+                    >
+                      {pageNumber}
+                    </button>
+                  )
+                )}
+                
+                <button 
+                  onClick={() => paginate(currentPage + 1)} 
+                  disabled={currentPage === totalPages}
+                  className={styles.paginationButton}
+                  aria-label="Next page"
+                >
+                  Next
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </section>

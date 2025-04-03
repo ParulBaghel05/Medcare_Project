@@ -1,7 +1,7 @@
-"use client"
+"use client";
 import Image from "next/image";
-import styles from "./page.module.css";   
-import { useRouter } from "next/navigation"; 
+import styles from "./page.module.css";
+import { useRouter } from "next/navigation";
 
 const Landing = () => {
   const router = useRouter();
@@ -9,6 +9,8 @@ const Landing = () => {
   const handleGetStarted = () => {
     router.push("/appointments");
   };
+
+
   return (
     <>
       <main className={styles.main}>
@@ -24,7 +26,7 @@ const Landing = () => {
         </section>
 
         <section className={styles["main-2"]}>
-        <Image 
+          <Image 
             src="/l1.svg" 
             alt="Healthcare Professional" 
             fill

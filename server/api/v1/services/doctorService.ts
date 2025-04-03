@@ -49,9 +49,7 @@ const create = async (doctorData: Doctor) => {
   const client = await dbPool.connect();
 
   try {
-    await client.query("BEGIN");
-
-    const result = await client.query(
+    const result = await dbPool.query(
       `INSERT INTO doctors (
         name, 
         speciality, 
@@ -67,14 +65,11 @@ const create = async (doctorData: Doctor) => {
       [name, speciality, rating, experience, photo_url, location, gender.toUpperCase(), disease ? JSON.stringify(disease) : null]
     );
 
-    await client.query("COMMIT");
     return result.rows[0];
-
-  } catch (error) {
-    await client.query("ROLLBACK");
-    throw error;
-  } finally {
-    client.release();
+  }
+  
+  catch (error) {
+    console.log("Error in creating doctor");
   }
 };
 
@@ -169,7 +164,7 @@ const updateDoctor = async (id: number, doctorData: Partial<Doctor>) => {
       }
     }
 
-    let updateResult
+    let updateResult;
     if (fields.length > 0) {
       values.push(id);
       const updateQuery = `
@@ -200,19 +195,14 @@ const updateDoctor = async (id: number, doctorData: Partial<Doctor>) => {
 const deleteDoctor = async (id: number) => {
   
   try {
-
-    const deleteQuery = `
-      DELETE FROM doctors
-      WHERE id = $1
-    `;
     const deleteResult = await dbPool.query(' DELETE FROM doctors WHERE id = $1', [id])
     if(!deleteResult.rowCount){
        throw new Error("Doctor not found")
     }
     return { success: true, message: "Doctor deleted successfully" };
   } catch (error) {
+    console.log(error);
     return { success: false, message: "Unable to locate Doctor" };
-    console.log()
   } 
 };
 

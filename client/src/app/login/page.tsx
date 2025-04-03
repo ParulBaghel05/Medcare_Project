@@ -30,9 +30,10 @@ const Login = () => {
         email,
         password,
       });
-
+      const userData=data.userData;
       toast.success("Logged in successfully!", { position: "top-right" });
-      Cookies.set("user",data.token);
+      Cookies.set("user",JSON.stringify(data.userData.user));
+      Cookies.set("token",data.userData.token);
       router.push("/appointments");
     } catch (error: any) {
       const errorMessage = error.response?.data?.error || "Login failed!";
@@ -91,6 +92,7 @@ const Login = () => {
               >
                 Reset
               </button>
+              <button className= {styles["glgn-btn"]} onClick={()=>window.location.href=`${process.env.NEXT_PUBLIC_API_BASE}/api/v1/auth/google`}>Login with Google</button>
             </div>
           </form>
           <div className={styles["frgt"]}>
